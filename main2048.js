@@ -2,9 +2,20 @@ var board = new Array();
 var score = 0;
 var hasConflicted = new Array();
 $(document).ready(function() {
+    prepareForMobile();
     newgame();
 });
 
+function prepareForMobile(){
+    $("#container").css('width',ContainerWidth-2*cellSpace);
+    $("#container").css('height',ContainerWidth-2*cellSpace);
+    $("#container").css('padding',cellSpace);
+    $("#container").css('border-radius',0.02*ContainerWidth);
+
+    $(".cell").css('width',cellSideLength);
+    $(".cell").css('height',cellSideLength);
+    $(".cell").css('border-radius',0.02*cellSideLength);
+}
 function newgame() {
 
     init();
@@ -15,7 +26,7 @@ function newgame() {
 function init() {
     for (var i = 0; i < 4; i++)
         for (var j = 0; j < 4; j++) {
-            var Cell = $("#cell-" + i + "-" + j);
+            var Cell = $("#cell-" + i + '-' + j);
             Cell.css('top', getPosTop(i, j));
             Cell.css('left', getPosLeft(i, j));
         }
@@ -33,7 +44,7 @@ function init() {
 }
 
 function updateBoardView() {
-    $('.number-cell').remove();
+    $(".number-cell").remove();
     for (var i = 0; i < 4; i++)
         for (var j = 0; j < 4; j++) {
             $("#container").append('<div class="number-cell" id="number-cell-' + i + '-' + j + '"></div>');
@@ -42,20 +53,24 @@ function updateBoardView() {
             if (board[i][j] == 0) {
                 theNumberCell.css('width', '0px');
                 theNumberCell.css('height', '0px');
-                theNumberCell.css('top', getPosTop(i, j) + 50);
-                theNumberCell.css('left', getPosLeft(i, j) + 50);
+                theNumberCell.css('top', getPosTop(i, j) + cellSideLength/2);
+                theNumberCell.css('left', getPosLeft(i, j) + cellSideLength/2);
+                theNumberCell.css('font-size',"20px");
             } else {
-                theNumberCell.css('width', '100px');
-                theNumberCell.css('height', '100px');
+                theNumberCell.css('width', cellSideLength);
+                theNumberCell.css('height', cellSideLength);
                 theNumberCell.css('top', getPosTop(i, j));
                 theNumberCell.css('left', getPosLeft(i, j));
                 theNumberCell.css('background-color', getNumberBackgroundColor(board[i][j]));
                 theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(getNumberText(board[i][j]));
+                theNumberCell.css('font-size',"20px");
             }
 
             hasConflicted[i][j] = false;
         }
+        $('.number-cell').css('line-height',cellSideLength+'px');
+        $('.number-cell').css('font-size',0.6*cellSideLength+'px');
 }
 
 function generateOneNumber() {
@@ -84,6 +99,19 @@ function generateOneNumber() {
 
     return true;
 }
+
+
+
+function isgameover() {
+    if (nospace(board) && nomove(board)) {
+        gameover();
+    }
+}
+
+function gameover() {
+    alert("gameover!");
+}
+
 $(document).keydown(function(event) {
     switch (event.keyCode) {
         case 37: //left
@@ -115,16 +143,6 @@ $(document).keydown(function(event) {
     }
 });
 
-function isgameover() {
-    if (nospace(board) && nomove(board)) {
-        gameover();
-    }
-}
-
-function gameover() {
-    alert('gameover!');
-}
-
 function moveLeft() {
 
     if (!canMoveLeft(board))
@@ -133,7 +151,6 @@ function moveLeft() {
     for (var i = 0; i < 4; i++)
         for (var j = 1; j < 4; j++) {
             if (board[i][j] != 0) {
-
                 for (var k = 0; k < j; k++) {
                     if (board[i][k] == 0 && noBlockHorizontal(i, k, j, board)) {
                         //move
@@ -145,7 +162,7 @@ function moveLeft() {
                         //move
                         showMoveAnimation(i, j, i, k);
                         //add
-                        board[i][k] += board[i][j];
+                        board[i][k] *= 2;
                         board[i][j] = 0;
                         //add score
                         score += board[i][k];
@@ -182,7 +199,7 @@ function moveRight() {
                         //move
                         showMoveAnimation(i, j, i, k);
                         //add
-                        board[i][k] += board[i][j];
+                        board[i][k] *= 2;
                         board[i][j] = 0;
                         //add score
                         score += board[i][k];
@@ -220,7 +237,7 @@ function moveUp() {
                         //move
                         showMoveAnimation(i, j, k, j);
                         //add
-                        board[k][j] += board[i][j];
+                        board[k][j] *= 2;
                         board[i][j] = 0;
                         //add score
                         score += board[k][j];
@@ -257,7 +274,7 @@ function moveDown() {
                         //move
                         showMoveAnimation(i, j, k, j);
                         //add
-                        board[k][j] += board[i][j];
+                        board[k][j] *= 2;
                         board[i][j] = 0;
                         //add score
                         score += board[k][j];

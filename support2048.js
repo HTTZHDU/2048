@@ -1,9 +1,13 @@
+var documentWidth = window.screen.availWidth;
+var ContainerWidth = 0.92*documentWidth;
+var cellSideLength = 0.18*documentWidth;
+var cellSpace = 0.04*documentWidth;
 function getPosTop(i, j) {
-    return 20 + i * 120;
+    return cellSpace + i * (cellSpace+cellSideLength);
 }
 
 function getPosLeft(i, j) {
-    return 20 + j * 120;
+    return cellSpace + j * (cellSpace+cellSideLength);
 }
 
 function getNumberBackgroundColor(number) {
@@ -54,19 +58,12 @@ function getNumberBackgroundColor(number) {
 function getNumberColor(number) {
     if (number <= 4) {
         return "#776e65";
-    } else {
+    } 
+    else {
         return "white";
     }
 }
 
-function nospace(board) {
-    for (var i = 0; i < 4; i++)
-        for (var j = 0; j < 4; j++)
-            if (board[i][j] == 0) {
-                return false;
-            }
-    return true;
-}
 
 function getNumberText( number ){
     switch( number ){
@@ -88,16 +85,24 @@ function getNumberText( number ){
     return "black";
 }
 
-function canMoveLeft(board) {
+function nospace(board) {
     for (var i = 0; i < 4; i++)
-        for (var j = 1; j < 4; j++)
-            if (board[i][j] != 0) {
-                if (board[i][j-1] == 0 || board[i][j-1] == board[i][j])
-                    return true;
+        for (var j = 0; j < 4; j++)
+            if (board[i][j] == 0) {
+                return false;
             }
+    return true;
+}
+
+function canMoveLeft( board ){
+
+    for( var i = 0 ; i < 4 ; i ++ )
+        for( var j = 1; j < 4 ; j ++ )
+            if( board[i][j] != 0 )
+                if( board[i][j-1] == 0 || board[i][j-1] == board[i][j] )
+                    return true;
 
     return false;
-
 }
 
 function canMoveRight(board){
@@ -111,6 +116,8 @@ function canMoveRight(board){
     }
     return false;
 }
+
+
 
 function canMoveUp(board){
     for(var j=0;j<4;j++){
@@ -135,13 +142,13 @@ function canMoveDown(board){
     }
     return false;
 }
-function noBlockHorizontal(row, col1, col2, board) {
-    for (var i = col1 + 1; i < col2; i++) {
-        if (board[row][i] != 0) {
+
+function noBlockHorizontal( row , col1 , col2 , board ){
+    for( var i = col1 + 1 ; i < col2 ; i ++ ){
+        if( board[row][i] != 0 )
             return false;
-        }
-    return true;
     }
+    return true;
 }
 
 function noBlockVertical( col , row1 , row2 , board ){

@@ -1,12 +1,12 @@
 header{
 	display: block;
 	margin: 0 auto;
-	width: 500px;
+	width: 100%;
 	text-align: center;
 }
-h1{
+header h1{
 	font-family: arial;
-	font-size: 60px;
+	font-size: 40px;
 	font-weight: bold;
 }
 header #newgamebutton{
@@ -38,8 +38,8 @@ header p{
 	position: relative;
 }
 .cell{
-	width: 100px;
-	height: 100px;
+/*	width: 100px;
+	height: 100px;*/
 	border-radius: 6px;
 	background-color: #ccc0b3;
 	position: absolute;
