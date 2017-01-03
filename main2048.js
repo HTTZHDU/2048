@@ -6,16 +6,17 @@ $(document).ready(function() {
     newgame();
 });
 
-function prepareForMobile(){
-    $("#container").css('width',ContainerWidth-2*cellSpace);
-    $("#container").css('height',ContainerWidth-2*cellSpace);
-    $("#container").css('padding',cellSpace);
-    $("#container").css('border-radius',0.02*ContainerWidth);
+function prepareForMobile() {
+    $("#container").css('width', ContainerWidth - 2 * cellSpace);
+    $("#container").css('height', ContainerWidth - 2 * cellSpace);
+    $("#container").css('padding', cellSpace);
+    $("#container").css('border-radius', 0.02 * ContainerWidth);
 
-    $(".cell").css('width',cellSideLength);
-    $(".cell").css('height',cellSideLength);
-    $(".cell").css('border-radius',0.02*cellSideLength);
+    $(".cell").css('width', cellSideLength);
+    $(".cell").css('height', cellSideLength);
+    $(".cell").css('border-radius', 0.02 * cellSideLength);
 }
+
 function newgame() {
 
     init();
@@ -53,9 +54,9 @@ function updateBoardView() {
             if (board[i][j] == 0) {
                 theNumberCell.css('width', '0px');
                 theNumberCell.css('height', '0px');
-                theNumberCell.css('top', getPosTop(i, j) + cellSideLength/2);
-                theNumberCell.css('left', getPosLeft(i, j) + cellSideLength/2);
-                theNumberCell.css('font-size',"20px");
+                theNumberCell.css('top', getPosTop(i, j) + cellSideLength / 2);
+                theNumberCell.css('left', getPosLeft(i, j) + cellSideLength / 2);
+                theNumberCell.css('font-size', "20px");
             } else {
                 theNumberCell.css('width', cellSideLength);
                 theNumberCell.css('height', cellSideLength);
@@ -64,13 +65,13 @@ function updateBoardView() {
                 theNumberCell.css('background-color', getNumberBackgroundColor(board[i][j]));
                 theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(getNumberText(board[i][j]));
-                theNumberCell.css('font-size',"20px");
+                theNumberCell.css('font-size', "20px");
             }
 
             hasConflicted[i][j] = false;
         }
-        $('.number-cell').css('line-height',cellSideLength+'px');
-        $('.number-cell').css('font-size',0.6*cellSideLength+'px');
+    $('.number-cell').css('line-height', cellSideLength + 'px');
+    $('.number-cell').css('font-size', 0.6 * cellSideLength + 'px');
 }
 
 function generateOneNumber() {
