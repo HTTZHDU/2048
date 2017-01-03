@@ -23,7 +23,7 @@ header #newgamebutton{
 header #newgamebutton:hover{
 	background-color: #9f8b77;
 }
-headr p{
+header p{
 	font-family: arial;
 	font-size: 25px;
 	margin: 20px auto;
@@ -44,7 +44,7 @@ headr p{
 	background-color: #ccc0b3;
 	position: absolute;
 }
-#number-cell{
+.number-cell{
 	border-radius: 6px;
 	font-family: arial;
 	font-weight: bold;
