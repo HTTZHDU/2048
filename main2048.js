@@ -56,7 +56,7 @@ function updateBoardView() {
                 theNumberCell.css('height', '0px');
                 theNumberCell.css('top', getPosTop(i, j) + cellSideLength / 2);
                 theNumberCell.css('left', getPosLeft(i, j) + cellSideLength / 2);
-                theNumberCell.css('font-size', "20px");
+                theNumberCell.css('font-size', "10px");
             } else {
                 theNumberCell.css('width', cellSideLength);
                 theNumberCell.css('height', cellSideLength);
@@ -65,7 +65,7 @@ function updateBoardView() {
                 theNumberCell.css('background-color', getNumberBackgroundColor(board[i][j]));
                 theNumberCell.css('color', getNumberColor(board[i][j]));
                 theNumberCell.text(getNumberText(board[i][j]));
-                theNumberCell.css('font-size', "20px");
+                theNumberCell.css('font-size', "10px");
             }
 
             hasConflicted[i][j] = false;
@@ -117,7 +117,7 @@ $(document).keydown(function(event) {
     switch (event.keyCode) {
         case 37: //left
             if (moveLeft()) {
-                setTimeout("generateOneNumber()", 210);
+                setTimeout("generateOneNumb er()", 210);
                 setTimeout("isgameover()", 300);
             }
             break;
